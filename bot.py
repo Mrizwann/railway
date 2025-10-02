@@ -59,17 +59,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("YashaBot is online. Use /usdt <amount> [name] to record transactions.")
 
 def main():
-    TOKEN = os.environ.get("BOT_TOKEN")
-    if not TOKEN:
-        print("Error: BOT_TOKEN environment variable not set.")
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
+    if not BOT_TOKEN:
+    raise ValueError("BOT_TOKEN not found in Railway environment variables")
         return
 
-    app = ApplicationBuilder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("usdt", usdt))
+   app = Application.builder().token(BOT_TOKEN).build()
 
-    print("Bot is running...")
-    app.run_polling()
+@app.command("start")
+async def start(update, context):
+    await update.message.reply_text("Bot is running ✅")
+
+app.run_polling()
 
 if __name__ == "__main__":
     main()
+
