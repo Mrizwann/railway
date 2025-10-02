@@ -69,9 +69,10 @@ def main():
 @app.command("start")
 async def start(update, context):
     await update.message.reply_text("Bot is running ✅")
-
+print("BOT_TOKEN loaded:", BOT_TOKEN[:7522838823:AAFxNi3uzfN2ZMC4mJwia_8WMYuK-eEuLAo], "...")
 app.run_polling()
 
 if __name__ == "__main__":
     main()
+
 
